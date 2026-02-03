@@ -5,101 +5,264 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Will You Be My Valentine? 💖</title>
     
+    <!-- Meta Tags for Social Sharing -->
+    <meta property="og:title" content="💖 A Special Valentine Message For You">
+    <meta property="og:description" content="Someone wants to ask you something special...">
+    <meta property="og:image" content="https://i.imgur.com/valentine-preview.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+    
+    <!-- QR Code Generator Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    
+    <!-- HTML2Canvas for Screenshots -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     
     <!-- Link to external CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Language Selector (Top Right) -->
+    <div class="language-selector" id="languageSelector">
+        <select id="languageSelect" class="language-dropdown">
+            <option value="en">🇺🇸 English</option>
+            <option value="es">🇪🇸 Español</option>
+            <option value="fr">🇫🇷 Français</option>
+            <option value="de">🇩🇪 Deutsch</option>
+            <option value="it">🇮🇹 Italiano</option>
+            <option value="pt">🇵🇹 Português</option>
+        </select>
+    </div>
+
+    <!-- Theme Toggle (Top Left) -->
+    <div class="theme-toggle" id="themeToggle">
+        <button class="theme-btn" id="themeBtn" title="Change Theme">
+            🎨
+        </button>
+        <div class="theme-options hidden" id="themeOptions">
+            <button class="theme-option" data-theme="pink">💖 Pink</button>
+            <button class="theme-option" data-theme="red">❤️ Red</button>
+            <button class="theme-option" data-theme="purple">💜 Purple</button>
+            <button class="theme-option" data-theme="blue">💙 Blue</button>
+            <button class="theme-option" data-theme="dark">🖤 Dark</button>
+        </div>
+    </div>
+    
     <!-- Floating hearts background -->
     <div class="hearts-container" id="heartsContainer"></div>
+    
+    <!-- Rose Petals Container -->
+    <div class="petals-container" id="petalsContainer"></div>
+    
+    <!-- Sparkle Cursor Trail -->
+    <canvas id="cursorCanvas"></canvas>
     
     <!-- Main content wrapper -->
     <div class="container" id="mainContainer">
         
-        <!-- NAME INPUT SCREEN (NEW FEATURE) -->
+        <!-- NAME INPUT SCREEN -->
         <div class="content-box fade-in" id="nameInputScreen">
             <h1 class="main-title">
                 <span class="heart-icon">💝</span>
                 <br>
-                Welcome to Your<br>
-                <span class="highlight">Valentine Experience</span>
+                <span data-translate="welcome">Welcome to Your</span><br>
+                <span class="highlight" data-translate="valentine-exp">Valentine Experience</span>
             </h1>
             
-            <p class="subtitle">
+            <p class="subtitle" data-translate="lets-make-special">
                 Let's make this special... What's your name?
             </p>
+            
+            <!-- Photo Upload (NEW) -->
+            <div class="photo-upload-container">
+                <div class="photo-preview" id="photoPreview">
+                    <img id="uploadedPhoto" src="" alt="" class="hidden">
+                    <div class="photo-placeholder" id="photoPlaceholder">
+                        <span class="photo-icon">📸</span>
+                        <p data-translate="add-photo">Add a photo (optional)</p>
+                    </div>
+                </div>
+                <input type="file" id="photoInput" accept="image/*" class="hidden">
+                <button class="btn-secondary" id="uploadPhotoBtn" data-translate="upload-photo">
+                    📷 Upload Photo
+                </button>
+            </div>
             
             <div class="input-container">
                 <input 
                     type="text" 
                     id="nameInput" 
                     class="name-input" 
+                    data-translate-placeholder="enter-name"
                     placeholder="Enter your name here..."
                     maxlength="20"
                 >
                 <button class="btn btn-primary" id="continueBtn">
-                    Continue ✨
+                    <span data-translate="continue">Continue</span> ✨
                 </button>
             </div>
             
-            <p class="hint-small">Or your crush's name if you're sharing this 😊</p>
+            <p class="hint-small" data-translate="or-crush">Or your crush's name if you're sharing this 😊</p>
         </div>
         
-        <!-- QUESTION SCREEN (ENHANCED) -->
+        <!-- QUESTION SCREEN -->
         <div class="content-box hidden" id="questionScreen">
+            <!-- Countdown Timer (NEW) -->
+            <div class="countdown-container" id="countdownContainer">
+                <p class="countdown-label" data-translate="days-until">Days Until Valentine's Day</p>
+                <div class="countdown-display" id="countdownDisplay">
+                    <span id="daysCount">0</span>
+                </div>
+            </div>
+
             <h1 class="main-title">
                 <span id="displayName">Friend</span>,<br>
-                Will You Be My<br>
-                <span class="highlight">Valentine?</span>
+                <span data-translate="will-you">Will You Be My</span><br>
+                <span class="highlight" data-translate="valentine">Valentine?</span>
             </h1>
             
-            <p class="subtitle">
+            <p class="subtitle" data-translate="important-question">
                 This is the most important question I'll ask today ✨
             </p>
             
             <div class="buttons-container">
                 <button class="btn btn-yes" id="yesBtn">
-                    Yes 💖
+                    <span data-translate="yes">Yes</span> 💖
                 </button>
                 <button class="btn btn-no" id="noBtn">
-                    No 💔
+                    <span data-translate="no">No</span> 💔
                 </button>
             </div>
             
             <p class="hint-text" id="hintText"></p>
         </div>
         
-        <!-- SUCCESS SCREEN (ENHANCED) -->
+        <!-- SUCCESS SCREEN -->
         <div class="content-box hidden" id="successScreen">
+            <!-- Photo Display (if uploaded) -->
+            <div class="success-photo-container hidden" id="successPhotoContainer">
+                <div class="heart-frame">
+                    <img id="successPhoto" src="" alt="Your Photo">
+                </div>
+            </div>
+
             <div class="explosion-text">
                 <h1 class="celebration-title">
                     <span id="displayNameSuccess">Friend</span>,<br>
-                    You just made my<br>
-                    <span class="heart-emoji">heart explode</span>
+                    <span data-translate="heart-explode">You just made my</span><br>
+                    <span class="heart-emoji" data-translate="heart">heart explode</span>
                     <span class="emoji-large">💥❤️</span>
                 </h1>
             </div>
             
-            <p class="success-message">
-                I knew you'd say yes! 😊
+            <!-- Love Calculator (NEW) -->
+            <div class="love-calculator">
+                <div class="calculator-display">
+                    <span class="calc-icon">💕</span>
+                    <span data-translate="love-match">Love Match:</span>
+                    <span class="compatibility-score" id="compatibilityScore">98%</span>
+                </div>
+                <div class="compatibility-bar">
+                    <div class="compatibility-fill" id="compatibilityFill"></div>
+                </div>
+            </div>
+            
+            <p class="success-message" id="successMessage">
+                <span data-translate="knew-yes">I knew you'd say yes!</span> 😊
             </p>
             
+            <!-- Personalized Love Message Generator (NEW) -->
+            <div class="love-message-box">
+                <p class="love-message" id="generatedMessage"></p>
+            </div>
+            
             <div class="final-message">
-                <h2 class="final-title">Happy Valentine's Day 💐</h2>
+                <h2 class="final-title" data-translate="happy-valentine">Happy Valentine's Day 💐</h2>
                 <p class="final-subtitle">
-                    <span id="displayNameFinal">You're</span> the best thing that's ever happened to me
+                    <span id="displayNameFinal">You're</span> <span data-translate="best-thing">the best thing that's ever happened to me</span>
                 </p>
             </div>
             
-            <!-- Music Toggle Button -->
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <!-- Screenshot Button (NEW) -->
+                <button class="btn-action" id="screenshotBtn">
+                    📷 <span data-translate="save-moment">Save This Moment</span>
+                </button>
+                
+                <!-- Share Button (NEW) -->
+                <button class="btn-action" id="shareBtn">
+                    📤 <span data-translate="share">Share</span>
+                </button>
+                
+                <!-- Voice Message Button (NEW) -->
+                <button class="btn-action" id="voiceBtn">
+                    🎤 <span data-translate="record-message">Record Message</span>
+                </button>
+                
+                <!-- QR Code Button (NEW) -->
+                <button class="btn-action" id="qrBtn">
+                    📱 <span data-translate="generate-qr">Generate QR Code</span>
+                </button>
+            </div>
+
+            <!-- Voice Recording Interface (NEW) -->
+            <div class="voice-recorder hidden" id="voiceRecorder">
+                <div class="recorder-controls">
+                    <button class="record-btn" id="recordBtn">🔴 <span data-translate="start-recording">Start Recording</span></button>
+                    <button class="stop-btn hidden" id="stopBtn">⏹️ <span data-translate="stop">Stop</span></button>
+                    <button class="play-btn hidden" id="playBtn">▶️ <span data-translate="play">Play</span></button>
+                </div>
+                <div class="recording-status" id="recordingStatus"></div>
+                <audio id="audioPlayback" controls class="hidden"></audio>
+            </div>
+
+            <!-- QR Code Display (NEW) -->
+            <div class="qr-code-container hidden" id="qrCodeContainer">
+                <h3 data-translate="qr-title">Share This QR Code</h3>
+                <div id="qrcode"></div>
+                <p class="qr-hint" data-translate="qr-hint">Print or share this code with your Valentine!</p>
+            </div>
+            
+            <!-- Music Control -->
             <div class="music-control">
                 <button class="btn-music" id="musicToggle">
-                    🔇 Click for Music
+                    🔇 <span data-translate="click-music">Click for Music</span>
                 </button>
+                <!-- Music Selection (NEW) -->
+                <select id="musicSelect" class="music-selector hidden">
+                    <option value="1" data-translate="song1">Romantic Piano</option>
+                    <option value="2" data-translate="song2">Jazz Love</option>
+                    <option value="3" data-translate="song3">Classical Romance</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Share Modal (NEW) -->
+        <div class="modal hidden" id="shareModal">
+            <div class="modal-content">
+                <span class="close-modal" id="closeShare">&times;</span>
+                <h2 data-translate="share-love">Share the Love!</h2>
+                <p class="share-text" id="shareText"></p>
+                <div class="share-buttons">
+                    <button class="share-option whatsapp" id="shareWhatsApp">
+                        <span class="share-icon">💬</span> WhatsApp
+                    </button>
+                    <button class="share-option twitter" id="shareTwitter">
+                        <span class="share-icon">🐦</span> Twitter
+                    </button>
+                    <button class="share-option facebook" id="shareFacebook">
+                        <span class="share-icon">📘</span> Facebook
+                    </button>
+                    <button class="share-option copy" id="copyLink">
+                        <span class="share-icon">🔗</span> <span data-translate="copy-link">Copy Link</span>
+                    </button>
+                </div>
+                <input type="text" id="shareLinkInput" class="share-link-input" readonly>
             </div>
         </div>
     </div>
@@ -107,13 +270,19 @@
     <!-- Canvas for fireworks/confetti -->
     <canvas id="fireworksCanvas"></canvas>
     
-    <!-- Background Music (Hidden Audio Element) -->
-    <audio id="backgroundMusic" loop>
-        <!-- Using a romantic royalty-free music URL -->
+    <!-- Background Music Options -->
+    <audio id="backgroundMusic1" loop>
         <source src="https://cdn.pixabay.com/download/audio/2022/03/10/audio_2c4a943254.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="backgroundMusic2" loop>
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="backgroundMusic3" loop>
+        <source src="https://cdn.pixabay.com/download/audio/2022/08/02/audio_884fe5c21c.mp3" type="audio/mpeg">
     </audio>
     
     <!-- Link to external JavaScript -->
     <script src="script.js"></script>
 </body>
-</html>
+    </html>
+                                                                                                              
