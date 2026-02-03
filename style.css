@@ -1,75 +1,40 @@
-/* ========================================
-   ULTIMATE VALENTINE WEBSITE - PREMIUM CSS
-   Features: 5 Themes, Rose Petals, Photo Upload,
-   Love Calculator, Sparkle Cursor, Share Modal, etc.
-   ======================================== */
+/* ULTIMATE VALENTINE WEBSITE - WORKING VERSION */
 
-/* ========================================
-   CSS VARIABLES FOR THEMES
-   ======================================== */
 :root {
-    --primary-gradient-start: #ffeef8;
-    --primary-gradient-mid1: #ffd4e5;
-    --primary-gradient-mid2: #ffb3d9;
-    --primary-gradient-mid3: #ff9fcf;
-    --primary-gradient-end: #ff8dc7;
-    --accent-color: #ff6b9d;
+    --primary-start: #ffeef8;
+    --primary-end: #ff8dc7;
+    --accent: #ff6b9d;
     --accent-dark: #c44569;
-    --text-primary: #2d2d2d;
-    --text-secondary: #666;
+    --text: #2d2d2d;
+    --text-light: #666;
     --box-bg: rgba(255, 255, 255, 0.95);
 }
 
-/* Theme: Red */
+/* THEMES */
 body[data-theme="red"] {
-    --primary-gradient-start: #ffe5e5;
-    --primary-gradient-mid1: #ffcccc;
-    --primary-gradient-mid2: #ff9999;
-    --primary-gradient-mid3: #ff6666;
-    --primary-gradient-end: #ff3333;
-    --accent-color: #ff0000;
+    --primary-start: #ffe5e5;
+    --primary-end: #ff3333;
+    --accent: #ff0000;
     --accent-dark: #cc0000;
 }
 
-/* Theme: Purple */
 body[data-theme="purple"] {
-    --primary-gradient-start: #f3e5f5;
-    --primary-gradient-mid1: #e1bee7;
-    --primary-gradient-mid2: #ce93d8;
-    --primary-gradient-mid3: #ba68c8;
-    --primary-gradient-end: #ab47bc;
-    --accent-color: #9c27b0;
+    --primary-start: #f3e5f5;
+    --primary-end: #ab47bc;
+    --accent: #9c27b0;
     --accent-dark: #7b1fa2;
 }
 
-/* Theme: Blue */
-body[data-theme="blue"] {
-    --primary-gradient-start: #e3f2fd;
-    --primary-gradient-mid1: #bbdefb;
-    --primary-gradient-mid2: #90caf9;
-    --primary-gradient-mid3: #64b5f6;
-    --primary-gradient-end: #42a5f5;
-    --accent-color: #2196f3;
-    --accent-dark: #1976d2;
-}
-
-/* Theme: Dark */
 body[data-theme="dark"] {
-    --primary-gradient-start: #2d2d2d;
-    --primary-gradient-mid1: #3d3d3d;
-    --primary-gradient-mid2: #4d4d4d;
-    --primary-gradient-mid3: #5d5d5d;
-    --primary-gradient-end: #6d6d6d;
-    --accent-color: #ff6b9d;
+    --primary-start: #2d2d2d;
+    --primary-end: #6d6d6d;
+    --accent: #ff6b9d;
     --accent-dark: #c44569;
-    --text-primary: #ffffff;
-    --text-secondary: #cccccc;
+    --text: #ffffff;
+    --text-light: #cccccc;
     --box-bg: rgba(50, 50, 50, 0.95);
 }
 
-/* ========================================
-   RESET & BASE STYLES
-   ======================================== */
 * {
     margin: 0;
     padding: 0;
@@ -83,28 +48,18 @@ body {
     justify-content: center;
     align-items: center;
     overflow-x: hidden;
-    background: linear-gradient(135deg, 
-        var(--primary-gradient-start) 0%, 
-        var(--primary-gradient-mid1) 25%, 
-        var(--primary-gradient-mid2) 50%, 
-        var(--primary-gradient-mid3) 75%, 
-        var(--primary-gradient-end) 100%
-    );
+    background: linear-gradient(135deg, var(--primary-start), var(--primary-end));
     background-size: 400% 400%;
     animation: gradientShift 15s ease infinite;
     position: relative;
-    cursor: none; /* For custom sparkle cursor */
 }
 
 @keyframes gradientShift {
-    0% { background-position: 0% 50%; }
+    0%, 100% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
 }
 
-/* ========================================
-   LANGUAGE SELECTOR
-   ======================================== */
+/* LANGUAGE & THEME SELECTORS */
 .language-selector {
     position: fixed;
     top: 20px;
@@ -114,25 +69,15 @@ body {
 
 .language-dropdown {
     padding: 10px 15px;
-    border: 2px solid var(--accent-color);
+    border: 2px solid var(--accent);
     border-radius: 25px;
     background: var(--box-bg);
-    color: var(--text-primary);
+    color: var(--text);
     font-family: 'Poppins', sans-serif;
-    font-size: 0.9rem;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
-.language-dropdown:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-}
-
-/* ========================================
-   THEME TOGGLE
-   ======================================== */
 .theme-toggle {
     position: fixed;
     top: 20px;
@@ -144,17 +89,16 @@ body {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    border: 2px solid var(--accent-color);
+    border: 2px solid var(--accent);
     background: var(--box-bg);
     font-size: 1.5rem;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s;
 }
 
 .theme-btn:hover {
     transform: scale(1.1) rotate(15deg);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .theme-options {
@@ -164,7 +108,7 @@ body {
     background: var(--box-bg);
     border-radius: 15px;
     padding: 10px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -176,36 +120,22 @@ body {
     border: none;
     border-radius: 10px;
     background: transparent;
-    color: var(--text-primary);
+    color: var(--text);
     font-family: 'Poppins', sans-serif;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s;
     text-align: left;
 }
 
 .theme-option:hover {
-    background: var(--accent-color);
+    background: var(--accent);
     color: white;
     transform: translateX(5px);
 }
 
-/* ========================================
-   SPARKLE CURSOR CANVAS
-   ======================================== */
-#cursorCanvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 9999;
-}
-
-/* ========================================
-   FLOATING HEARTS BACKGROUND
-   ======================================== */
-.hearts-container {
+/* FLOATING HEARTS & PETALS */
+.hearts-container,
+.petals-container {
     position: fixed;
     top: 0;
     left: 0;
@@ -216,78 +146,37 @@ body {
     overflow: hidden;
 }
 
-.heart {
+.heart,
+.petal {
     position: absolute;
     font-size: 20px;
     opacity: 0;
     animation: float-up 8s ease-in infinite;
-    will-change: transform, opacity;
-}
-
-@keyframes float-up {
-    0% {
-        transform: translateY(100vh) translateX(0) rotate(0deg);
-        opacity: 0;
-    }
-    10% {
-        opacity: 0.6;
-    }
-    90% {
-        opacity: 0.6;
-    }
-    100% {
-        transform: translateY(-100px) translateX(50px) rotate(360deg);
-        opacity: 0;
-    }
-}
-
-/* ========================================
-   ROSE PETALS ANIMATION (NEW)
-   ======================================== */
-.petals-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 2;
-    overflow: hidden;
 }
 
 .petal {
-    position: absolute;
-    font-size: 18px;
-    opacity: 0;
     animation: fall-petal 12s linear infinite;
-    will-change: transform, opacity;
+}
+
+@keyframes float-up {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.6; }
+    100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
 }
 
 @keyframes fall-petal {
-    0% {
-        transform: translateY(-100px) translateX(0) rotate(0deg);
-        opacity: 0;
-    }
-    10% {
-        opacity: 0.8;
-    }
-    90% {
-        opacity: 0.6;
-    }
-    100% {
-        transform: translateY(100vh) translateX(100px) rotate(720deg);
-        opacity: 0;
-    }
+    0% { transform: translateY(-100px) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.8; }
+    100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
 }
 
-/* ========================================
-   MAIN CONTAINER
-   ======================================== */
+/* CONTAINER */
 .container {
     position: relative;
     z-index: 10;
     width: 90%;
-    max-width: 650px;
+    max-width: 600px;
     padding: 20px;
 }
 
@@ -296,30 +185,22 @@ body {
     backdrop-filter: blur(20px);
     border-radius: 35px;
     padding: 60px 45px;
-    box-shadow: 
-        0 25px 70px rgba(255, 105, 180, 0.35),
-        0 0 0 1px rgba(255, 255, 255, 0.6),
-        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    box-shadow: 0 25px 70px rgba(255, 105, 180, 0.35);
     text-align: center;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.4s;
 }
 
 .content-box:hover {
-    box-shadow: 
-        0 30px 80px rgba(255, 105, 180, 0.45),
-        0 0 0 1px rgba(255, 255, 255, 0.7),
-        inset 0 1px 0 rgba(255, 255, 255, 1);
     transform: translateY(-8px);
+    box-shadow: 0 30px 80px rgba(255, 105, 180, 0.45);
 }
 
-/* ========================================
-   TYPOGRAPHY
-   ======================================== */
+/* TYPOGRAPHY */
 .main-title {
     font-family: 'Playfair Display', serif;
     font-size: 3.2rem;
     font-weight: 700;
-    color: var(--text-primary);
+    color: var(--text);
     margin-bottom: 20px;
     line-height: 1.2;
 }
@@ -330,34 +211,29 @@ body {
     animation: pulse-heart 1.5s ease infinite;
 }
 
+@keyframes pulse-heart {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}
+
 .highlight {
-    background: linear-gradient(45deg, var(--accent-color), var(--accent-dark), var(--accent-color));
-    background-size: 200% 200%;
+    background: linear-gradient(45deg, var(--accent), var(--accent-dark));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    display: inline-block;
-    animation: gradient-text 3s ease infinite;
-}
-
-@keyframes gradient-text {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
 }
 
 .subtitle {
     font-size: 1.15rem;
-    color: var(--text-secondary);
+    color: var(--text-light);
     margin-bottom: 40px;
     font-weight: 400;
-    letter-spacing: 0.5px;
-    line-height: 1.6;
 }
 
 .hint-text {
     margin-top: 25px;
     font-size: 1rem;
-    color: var(--accent-color);
+    color: var(--accent);
     font-weight: 600;
     min-height: 30px;
     font-style: italic;
@@ -367,14 +243,11 @@ body {
 .hint-small {
     margin-top: 15px;
     font-size: 0.9rem;
-    color: var(--text-secondary);
-    font-weight: 300;
+    color: var(--text-light);
     font-style: italic;
 }
 
-/* ========================================
-   PHOTO UPLOAD SECTION (NEW)
-   ======================================== */
+/* PHOTO UPLOAD */
 .photo-upload-container {
     margin: 30px 0;
 }
@@ -385,15 +258,13 @@ body {
     margin: 0 auto 15px;
     border-radius: 50%;
     overflow: hidden;
-    border: 4px solid var(--accent-color);
-    position: relative;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
+    border: 4px solid var(--accent);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    transition: all 0.3s;
 }
 
 .photo-preview:hover {
     transform: scale(1.05);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
 }
 
 .photo-placeholder {
@@ -404,17 +275,11 @@ body {
     justify-content: center;
     align-items: center;
     background: linear-gradient(135deg, #ffe5f0, #ffd4e5);
-    color: var(--accent-color);
+    color: var(--accent);
 }
 
 .photo-icon {
     font-size: 3rem;
-    margin-bottom: 5px;
-}
-
-.photo-placeholder p {
-    font-size: 0.75rem;
-    font-weight: 500;
 }
 
 #uploadedPhoto {
@@ -425,27 +290,23 @@ body {
 
 .btn-secondary {
     padding: 12px 30px;
-    border: 2px solid var(--accent-color);
+    border: 2px solid var(--accent);
     border-radius: 50px;
     background: transparent;
-    color: var(--accent-color);
+    color: var(--accent);
     font-family: 'Poppins', sans-serif;
-    font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s;
 }
 
 .btn-secondary:hover {
-    background: var(--accent-color);
+    background: var(--accent);
     color: white;
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(255, 107, 157, 0.3);
 }
 
-/* ========================================
-   NAME INPUT SECTION
-   ======================================== */
+/* INPUT */
 .input-container {
     display: flex;
     flex-direction: column;
@@ -460,27 +321,19 @@ body {
     border: 3px solid rgba(255, 107, 157, 0.3);
     border-radius: 50px;
     background: rgba(255, 255, 255, 0.9);
-    color: var(--text-primary);
+    color: var(--text);
     text-align: center;
-    transition: all 0.3s ease;
     outline: none;
-    box-shadow: 0 5px 15px rgba(255, 107, 157, 0.1);
+    transition: all 0.3s;
 }
 
 .name-input:focus {
-    border-color: var(--accent-color);
-    box-shadow: 0 8px 25px rgba(255, 107, 157, 0.3);
+    border-color: var(--accent);
     transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 107, 157, 0.3);
 }
 
-.name-input::placeholder {
-    color: #bbb;
-    font-weight: 300;
-}
-
-/* ========================================
-   COUNTDOWN TIMER (NEW)
-   ======================================== */
+/* COUNTDOWN */
 .countdown-container {
     margin-bottom: 30px;
     padding: 20px;
@@ -491,28 +344,23 @@ body {
 
 .countdown-label {
     font-size: 0.9rem;
-    color: var(--text-secondary);
+    color: var(--text-light);
     margin-bottom: 10px;
-    font-weight: 500;
 }
 
 .countdown-display {
     font-family: 'Playfair Display', serif;
     font-size: 4rem;
     font-weight: 700;
-    color: var(--accent-color);
-    text-shadow: 0 4px 10px rgba(255, 107, 157, 0.3);
+    color: var(--accent);
 }
 
-/* ========================================
-   BUTTONS
-   ======================================== */
+/* BUTTONS */
 .buttons-container {
     display: flex;
     gap: 20px;
     justify-content: center;
     flex-wrap: wrap;
-    position: relative;
     min-height: 85px;
 }
 
@@ -524,63 +372,32 @@ body {
     border: none;
     border-radius: 50px;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
-    position: relative;
-    overflow: hidden;
-    letter-spacing: 0.5px;
-}
-
-.btn::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.4);
-    transform: translate(-50%, -50%);
-    transition: width 0.6s, height 0.6s;
-}
-
-.btn:hover::before {
-    width: 350px;
-    height: 350px;
+    transition: all 0.3s;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.15);
 }
 
 .btn-primary,
 .btn-yes {
-    background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-dark) 100%);
+    background: linear-gradient(135deg, var(--accent), var(--accent-dark));
     color: white;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.btn-primary:hover,
-.btn-yes:hover {
+.btn-yes:hover,
+.btn-primary:hover {
     transform: translateY(-4px) scale(1.05);
     box-shadow: 0 18px 45px rgba(255, 107, 157, 0.5);
 }
 
-.btn-primary:active,
-.btn-yes:active {
-    transform: translateY(-2px) scale(1.02);
-}
-
 .btn-no {
-    background: linear-gradient(135deg, #e8e8e8 0%, #c0c0c0 100%);
+    background: linear-gradient(135deg, #e8e8e8, #c0c0c0);
     color: #666;
-    transition: all 0.15s ease;
 }
 
 .btn-no:hover {
     transform: translateY(-3px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
 }
 
-/* ========================================
-   SUCCESS SCREEN - PHOTO DISPLAY (NEW)
-   ======================================== */
+/* SUCCESS SCREEN */
 .success-photo-container {
     margin-bottom: 30px;
 }
@@ -589,19 +406,7 @@ body {
     width: 200px;
     height: 200px;
     margin: 0 auto;
-    position: relative;
     animation: float-gentle 3s ease-in-out infinite;
-}
-
-.heart-frame::before {
-    content: '💖';
-    position: absolute;
-    font-size: 220px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-    opacity: 0.3;
 }
 
 .heart-frame img {
@@ -609,10 +414,8 @@ body {
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
-    position: relative;
-    z-index: 2;
-    border: 5px solid var(--accent-color);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    border: 5px solid var(--accent);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
 }
 
 @keyframes float-gentle {
@@ -620,15 +423,12 @@ body {
     50% { transform: translateY(-10px); }
 }
 
-/* ========================================
-   LOVE CALCULATOR (NEW)
-   ======================================== */
+/* LOVE CALCULATOR */
 .love-calculator {
     margin: 30px 0;
     padding: 25px;
     background: linear-gradient(135deg, rgba(255, 107, 157, 0.15), rgba(196, 69, 105, 0.15));
     border-radius: 20px;
-    border: 2px solid rgba(255, 107, 157, 0.3);
 }
 
 .calculator-display {
@@ -639,7 +439,6 @@ body {
     margin-bottom: 15px;
     font-size: 1.3rem;
     font-weight: 600;
-    color: var(--text-primary);
 }
 
 .calc-icon {
@@ -650,8 +449,7 @@ body {
 .compatibility-score {
     font-family: 'Playfair Display', serif;
     font-size: 2.5rem;
-    color: var(--accent-color);
-    font-weight: 700;
+    color: var(--accent);
     animation: count-up 2s ease-out;
 }
 
@@ -666,182 +464,70 @@ body {
     background: rgba(255, 255, 255, 0.3);
     border-radius: 10px;
     overflow: hidden;
-    position: relative;
 }
 
 .compatibility-fill {
     height: 100%;
-    background: linear-gradient(90deg, var(--accent-color), var(--accent-dark));
+    background: linear-gradient(90deg, var(--accent), var(--accent-dark));
     border-radius: 10px;
     width: 0%;
     animation: fill-bar 2s ease-out forwards;
-    box-shadow: 0 0 10px var(--accent-color);
 }
 
 @keyframes fill-bar {
     to { width: 98%; }
 }
 
-/* ========================================
-   LOVE MESSAGE GENERATOR (NEW)
-   ======================================== */
+/* LOVE MESSAGE */
 .love-message-box {
     margin: 25px 0;
     padding: 20px 25px;
     background: rgba(255, 255, 255, 0.5);
-    border-left: 4px solid var(--accent-color);
+    border-left: 4px solid var(--accent);
     border-radius: 10px;
-    font-style: italic;
 }
 
 .love-message {
     font-size: 1.05rem;
-    color: var(--text-secondary);
+    color: var(--text-light);
     line-height: 1.7;
-    font-family: 'Georgia', serif;
+    font-style: italic;
 }
 
-/* ========================================
-   ACTION BUTTONS (NEW)
-   ======================================== */
+/* ACTION BUTTONS */
 .action-buttons {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: 1fr;
     gap: 15px;
     margin: 30px 0;
 }
 
 .btn-action {
     padding: 15px 25px;
-    border: 2px solid var(--accent-color);
+    border: 2px solid var(--accent);
     border-radius: 15px;
     background: transparent;
-    color: var(--accent-color);
+    color: var(--accent);
     font-family: 'Poppins', sans-serif;
-    font-size: 0.95rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
+    transition: all 0.3s;
 }
 
 .btn-action:hover {
-    background: var(--accent-color);
+    background: var(--accent);
     color: white;
     transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(255, 107, 157, 0.4);
 }
 
-/* ========================================
-   VOICE RECORDER (NEW)
-   ======================================== */
-.voice-recorder {
-    margin-top: 25px;
-    padding: 25px;
-    background: rgba(255, 107, 157, 0.1);
-    border-radius: 20px;
-    border: 2px dashed var(--accent-color);
-}
-
-.recorder-controls {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 15px;
-}
-
-.record-btn,
-.stop-btn,
-.play-btn {
-    padding: 12px 25px;
-    border: none;
-    border-radius: 25px;
-    font-family: 'Poppins', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.record-btn {
-    background: linear-gradient(135deg, #ff4444, #cc0000);
-    color: white;
-}
-
-.stop-btn {
-    background: linear-gradient(135deg, #666, #333);
-    color: white;
-}
-
-.play-btn {
-    background: linear-gradient(135deg, #44ff44, #00cc00);
-    color: white;
-}
-
-.record-btn:hover,
-.stop-btn:hover,
-.play-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-}
-
-.recording-status {
-    text-align: center;
-    color: var(--accent-color);
-    font-weight: 600;
-    min-height: 25px;
-}
-
-#audioPlayback {
-    width: 100%;
-    margin-top: 15px;
-    border-radius: 25px;
-}
-
-/* ========================================
-   QR CODE CONTAINER (NEW)
-   ======================================== */
-.qr-code-container {
-    margin-top: 30px;
-    padding: 30px;
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-}
-
-.qr-code-container h3 {
-    color: var(--accent-color);
-    font-family: 'Playfair Display', serif;
-    margin-bottom: 20px;
-}
-
-#qrcode {
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-}
-
-.qr-hint {
-    margin-top: 15px;
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-    font-style: italic;
-}
-
-/* ========================================
-   SHARE MODAL (NEW)
-   ======================================== */
+/* SHARE MODAL */
 .modal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0,0,0,0.7);
     backdrop-filter: blur(5px);
     display: flex;
     justify-content: center;
@@ -856,19 +542,13 @@ body {
     max-width: 500px;
     width: 90%;
     position: relative;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
     animation: modal-appear 0.3s ease-out;
 }
 
 @keyframes modal-appear {
-    from {
-        opacity: 0;
-        transform: scale(0.8);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
 }
 
 .close-modal {
@@ -876,26 +556,189 @@ body {
     top: 15px;
     right: 20px;
     font-size: 2rem;
-    color: var(--text-secondary);
+    color: var(--text-light);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s;
 }
 
 .close-modal:hover {
-    color: var(--accent-color);
+    color: var(--accent);
     transform: rotate(90deg);
 }
 
-.modal-content h2 {
+.share-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.share-option {
+    padding: 15px;
+    border: none;
+    border-radius: 15px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    color: white;
+    transition: all 0.3s;
+}
+
+.whatsapp { background: linear-gradient(135deg, #25D366, #128C7E); }
+.twitter { background: linear-gradient(135deg, #1DA1F2, #0d8bd9); }
+.facebook { background: linear-gradient(135deg, #4267B2, #365899); }
+.copy { background: linear-gradient(135deg, #666, #444); }
+
+.share-option:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.share-link-input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid rgba(255, 107, 157, 0.3);
+    border-radius: 10px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* MUSIC */
+.music-control {
+    margin-top: 35px;
+}
+
+.btn-music {
+    padding: 12px 30px;
+    border: 2px solid var(--accent);
+    border-radius: 50px;
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--accent);
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s;
+}
+
+.btn-music:hover {
+    background: var(--accent);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.btn-music.playing {
+    background: var(--accent);
+    color: white;
+    animation: pulse-button 1.5s ease infinite;
+}
+
+@keyframes pulse-button {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* SUCCESS TITLES */
+.celebration-title {
     font-family: 'Playfair Display', serif;
-    color: var(--accent-color);
-    margin-bottom: 20px;
-}
-
-.share-text {
-    color: var(--text-secondary);
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--text);
     margin-bottom: 25px;
-    line-height: 1.6;
 }
 
-.share-b
+.heart-emoji {
+    background: linear-gradient(45deg, var(--accent), var(--accent-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.emoji-large {
+    display: block;
+    font-size: 4.5rem;
+    margin-top: 20px;
+    animation: pulse-heart 1s ease infinite;
+}
+
+.success-message {
+    font-size: 1.25rem;
+    color: var(--text-light);
+    margin: 35px 0;
+}
+
+.final-message {
+    margin-top: 45px;
+    padding-top: 45px;
+    border-top: 2px solid rgba(255, 107, 157, 0.3);
+}
+
+.final-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.8rem;
+    color: var(--accent);
+    margin-bottom: 18px;
+}
+
+.final-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-light);
+}
+
+/* ANIMATIONS */
+.fade-in {
+    animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.hidden {
+    display: none !important;
+}
+
+.explosion-text {
+    animation: explode 0.7s cubic-bezier(0.36, 0, 0.66, -0.56) forwards;
+}
+
+@keyframes explode {
+    0% { transform: scale(0.3); opacity: 0; }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0) rotate(0deg); }
+    25% { transform: translateX(-12px) rotate(-5deg); }
+    75% { transform: translateX(12px) rotate(5deg); }
+}
+
+/* FIREWORKS */
+#fireworksCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .content-box { padding: 45px 30px; }
+    .main-title { font-size: 2.5rem; }
+    .btn { font-size: 1.15rem; padding: 18px 45px; }
+    .celebration-title { font-size: 2.2rem; }
+    .countdown-display { font-size: 3rem; }
+    .language-selector, .theme-toggle { top: 10px; }
+}
+
+@media (max-width: 480px) {
+    .main-title { font-size: 2rem; }
+    .heart-icon { font-size: 3rem; }
+    .btn { font-size: 1.05rem; padding: 16px 40px; }
+    .content-box { padding: 35px 20px; }
+    .share-buttons { grid-template-columns: 1fr; }
+   }
+       
